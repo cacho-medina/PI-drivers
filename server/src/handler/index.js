@@ -10,6 +10,8 @@ const getDriversHandler = async (req, res) => {
             const drivers = data.filter(
                 (driver) => driver.name.forename === name
             );
+            if (!Object.keys(drivers).length)
+                throw new Error("Conductor no encontrado");
             res.status(200).json(drivers);
         } else {
             //si no hay queries responde con todos los drivers
@@ -30,7 +32,12 @@ const getDriverHandler = async (req, res) => {
         const driver = {
             id: data.id,
             name: `${data.name.forename} ${data.name.surname}`,
-            team: data.team,
+            code: data.code,
+            team: data.teams.split(","),
+            img: data.image.url,
+            nationality: data.nationality,
+            birthday: data.dob,
+            description: data.description,
         };
         res.status(200).json(driver);
     } catch (error) {
@@ -45,8 +52,10 @@ const getTeamsHandler = async (req, res) => {
 
         data.forEach((driver) => {
             results.push(driver.teams);
+            //se obtiene string de teams
         });
         const teams = [...new Set(results)]; //obtiene los teams sin repetir
+
         res.status(200).json(teams);
     } catch (error) {
         res.status(400).json({ message: error.message });
