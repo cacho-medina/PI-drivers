@@ -5,13 +5,14 @@ const getDriversHandler = async (req, res) => {
     try {
         const response = await axios.get("http://localhost:5000/drivers");
         const data = response.data;
-
+        //si hay queries en el path devuelve el driver encontrado por name.forename
         if (name) {
             const drivers = data.filter(
                 (driver) => driver.name.forename === name
             );
             res.status(200).json(drivers);
         } else {
+            //si no hay queries responde con todos los drivers
             res.status(200).json(data);
         }
     } catch (error) {
@@ -25,7 +26,13 @@ const getDriverHandler = async (req, res) => {
             `http://localhost:5000/drivers/${idDriver}`
         );
         const data = response.data;
-        res.status(200).json(data);
+        //crea driver con la informacion necesaria
+        const driver = {
+            id: data.id,
+            name: `${data.name.forename} ${data.name.surname}`,
+            team: data.team,
+        };
+        res.status(200).json(driver);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
