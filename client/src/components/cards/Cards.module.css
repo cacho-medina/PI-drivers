@@ -1,0 +1,11 @@
+.contenedor {
+    margin: 20px 0;
+    border: 1px solid #b1b1b1;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+}

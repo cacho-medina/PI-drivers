@@ -1,0 +1,17 @@
+:root {
+    --main-red: #e10600;
+    --dark: #1f1f27;
+    --gray: #949498;
+}
+.App {
+    font-family: "F1 regular";
+    background-color: #e2e2e2;
+    background-image: url(../src/assets/f1_logo.svg);
+    background-repeat: repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

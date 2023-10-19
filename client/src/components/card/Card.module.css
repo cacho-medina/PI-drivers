@@ -1,0 +1,48 @@
+:root {
+    --text: #15151e;
+}
+.card {
+    color: var(--dark);
+    border-top: 2px solid var(--dark);
+    border-right: 2px solid var(--dark);
+    border-top-right-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px 0 0;
+    transition: all 0.2s ease-in;
+    &:hover {
+        transform: translateY(-5px);
+        border-top: 2px solid var(--main-red);
+        border-right: 2px solid var(--main-red);
+    }
+}
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.2rem;
+}
+.driverName {
+    text-decoration: none;
+    color: var(--dark);
+}
+.driverName h2 {
+    margin: 0;
+}
+.id {
+    font-family: "F1 wide";
+    border-right: 4px solid var(--main-red);
+    padding-right: 5px;
+    margin: 0;
+}
+.team {
+    align-self: flex-end;
+    color: var(--gray);
+    font-weight: lighter;
+    margin: 0 0 20px 0;
+}
+.card img {
+    height: 300px;
+}

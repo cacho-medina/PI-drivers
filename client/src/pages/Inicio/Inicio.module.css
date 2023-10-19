@@ -1,0 +1,43 @@
+.inicio {
+    background-color: red;
+    background-image: url(../../assets/F1.svg);
+    background-repeat: repeat;
+    background-position: center;
+    animation: moveBackground 15s linear infinite;
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0; /* Posición inicial del fondo */
+    }
+    100% {
+        background-position: 100% 0; /* Posición final del fondo (desplazado completamente hacia la derecha) */
+    }
+}
+.img {
+    width: 500px;
+}
+.img img {
+    width: 100%;
+    height: auto;
+}
+.title {
+    color: #fff;
+    font-size: 4rem;
+    font-family: "F1 regular";
+}
+.link {
+    padding: 10px;
+    background-color: #fff;
+    color: red;
+    transition: all 0.3s ease;
+    &:hover {
+        background-color: #9b0c15;
+        color: #fff;
+    }
+}

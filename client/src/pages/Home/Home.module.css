@@ -1,0 +1,125 @@
+:root {
+    --text-red: #c1121f;
+    --hover-btn: #9b0c15;
+}
+.link {
+    padding: 10px;
+    background-color: var(--text-red);
+    color: #fff;
+    font-family: "Titillium Web";
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    transition: all 0.3s ease;
+    &:hover {
+        background-color: var(--hover-btn);
+    }
+}
+.form {
+    padding: 10px;
+    background-color: var(--dark);
+    color: #fff;
+    font-family: "Titillium Web";
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    transition: all 0.3s ease;
+    &:hover {
+        background-color: var(--hover-btn);
+    }
+}
+/* .App {
+    font-family: "F1 regular";
+    background-color: #e2e2e2;
+    background-image: url(../../assets/f1_logo.svg);
+    background-repeat: repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.btn {
+    cursor: pointer;
+    background: transparent;
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    outline: none;
+    border: 2px solid var(--text-red);
+    margin: 40px;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: var(--text-red);
+    -webkit-box-reflect: below 0px linear-gradient(transparent, #0002);
+    transition: 0.45s;
+    transition-delay: 0s;
+}
+.btn:hover {
+    transition-delay: 1.5s;
+    color: #fff;
+    box-shadow: 0 0 10px var(--text-red), 0 0 20px var(--text-red),
+        0 0 40px var(--text-red), 0 0 80px var(--text-red),
+        0 0 100px var(--text-red);
+}
+.btn span {
+    text-align: center;
+    position: relative;
+    z-index: 100;
+}
+.btn::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--text-red);
+    box-shadow: 5px -8px 0 var(--text-red), 5px 8px 0 var(--text-red);
+    transition: width 0.5s, left 0.5s, height 0.5s, box-shadow 0.5s;
+    transition-delay: 1s, 0.5s, 0s, 0s;
+}
+.btn:hover::before {
+    width: 60%;
+    height: 100%;
+    /* right: -2px; */
+    left: -2px;
+    box-shadow: 5px 0 0 var(--text-red), 5px 0 0 var(--text-red);
+    transition-delay: 0s, 0.5s, 1s, 1s;
+}
+.btn::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--text-red);
+    box-shadow: -5px -8px 0 var(--text-red), -5px 8px 0 var(--text-red);
+    transition: width 0.5s, right 0.5s, height 0.5s, box-shadow 0.5s;
+    transition-delay: 1s, 0.5s, 0s, 0s;
+}
+.btn:hover::after {
+    width: 60%;
+    height: 102%;
+    right: -2px;
+    box-shadow: -5px 0 0 var(--text-red), -5px 0 0 var(--text-red);
+    transition-delay: 0s, 0.5s, 1s, 1s;
+}
+.title {
+    font-size: 4rem;
+    font-style: italic;
+}
