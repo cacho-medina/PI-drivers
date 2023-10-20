@@ -1,0 +1,12 @@
+.optionsContainer {
+    display: flex;
+    gap: 10px;
+}
+.options {
+    padding: 10px 15px;
+    border: 1px solid var(--gray);
+    color: #555555;
+    &:focus {
+        outline: unset;
+    }
+}

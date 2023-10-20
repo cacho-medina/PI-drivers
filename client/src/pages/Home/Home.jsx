@@ -10,17 +10,20 @@ import styles from "./Home.module.css";
 const Home = () => {
     const [show, setShow] = useState(false);
     const [driver, setdriver] = useState("");
+    const [page, setPage] = useState(1);
+    const [itemPage, setItemPage] = useState(9);
+
+    //paginacion
+    const paginas = driver.length / itemPage;
 
     function getDrivers() {
-        fetch("http://localhost:3001/drivers/2")
+        fetch("http://localhost:3001/drivers/1")
             .then((res) => res.json())
             .then((driver) => setdriver(driver))
             .catch((err) => console.log(`Error: ${err}`));
     }
     function showDrivers() {
-        setTimeout(() => {
-            setShow(!show);
-        }, 3000);
+        setShow(!show);
     }
     useEffect(() => {
         getDrivers();
@@ -38,10 +41,18 @@ const Home = () => {
                 <Searchbar></Searchbar>
                 <Options></Options>
             </div>
-            <button className={styles.btn} onClick={showDrivers}>
-                <span>{show ? "🏁" : "Mostrar conductores"}</span>
-            </button>
-            {show ? <Cards driver={driver}></Cards> : ""}
+            {show ? (
+                <Cards
+                    driver={driver}
+                    paginas={paginas}
+                    page={page}
+                    setPage={setPage}
+                ></Cards>
+            ) : (
+                <button className={styles.btn} onClick={showDrivers}>
+                    <span>Mostrar conductores</span>
+                </button>
+            )}
         </>
     );
 };

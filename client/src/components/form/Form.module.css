@@ -23,7 +23,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    gap: 25px;
+    gap: 20px;
     width: 50%;
     font-size: 1.1rem;
 }
@@ -32,6 +32,9 @@
     justify-content: space-between;
     align-items: center;
     gap: 20px;
+}
+.rowError {
+    justify-content: flex-end;
 }
 .btn {
     align-self: center;
@@ -49,6 +52,7 @@
     &:hover {
         color: red;
         outline: 2px solid red;
+        transform: translateY(-3px);
     }
 }
 input[type="text"] {
@@ -60,4 +64,23 @@ input[type="text"] {
     &:focus {
         outline: unset;
     }
+}
+textarea {
+    resize: none;
+    width: 40%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid var(--gray);
+    font-size: inherit;
+    overflow: hidden;
+    font-weight: 300;
+    &:focus {
+        outline: unset;
+    }
+}
+
+.errorMessage {
+    color: red;
+    font-family: "Titillium Web";
+    font-size: small;
 }

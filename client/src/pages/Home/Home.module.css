@@ -30,18 +30,6 @@
         background-color: var(--hover-btn);
     }
 }
-/* .App {
-    font-family: "F1 regular";
-    background-color: #e2e2e2;
-    background-image: url(../../assets/f1_logo.svg);
-    background-repeat: repeat;
-    background-position: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-} */
 .options {
     display: flex;
     justify-content: center;
