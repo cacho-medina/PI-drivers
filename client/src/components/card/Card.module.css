@@ -7,6 +7,7 @@
     border-right: 2px solid var(--dark);
     border-top-right-radius: 15px;
     display: flex;
+    flex-basis: 25%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -22,7 +23,8 @@
 .cardHeader {
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: space-between;
+    gap: 25px;
     font-size: 1.2rem;
 }
 .driverName {
@@ -39,9 +41,10 @@
     margin: 0;
 }
 .team {
-    align-self: flex-end;
+    align-self: center;
     color: var(--gray);
     font-weight: lighter;
+    font-size: 0.9rem;
     margin: 0 0 20px 0;
 }
 .card img {

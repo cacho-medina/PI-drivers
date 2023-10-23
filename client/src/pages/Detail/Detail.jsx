@@ -23,7 +23,7 @@ const Detail = () => {
     return (
         <>
             <Link to="/home" className={styles.link}>
-                Home
+                Volver
             </Link>
             <div className={styles.driverContainer}>
                 <div className={styles.imgContainer}>

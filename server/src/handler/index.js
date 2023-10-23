@@ -10,8 +10,7 @@ const getDriversHandler = async (req, res) => {
             const drivers = data.filter(
                 (driver) => driver.name.forename === name
             );
-            if (!Object.keys(drivers).length)
-                throw new Error("Conductor no encontrado");
+            if (!drivers.length) throw new Error("Conductor no encontrado");
             res.status(200).json(drivers);
         } else {
             //si no hay queries responde con todos los drivers

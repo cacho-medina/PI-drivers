@@ -4,30 +4,38 @@ import { Link } from "react-router-dom";
 import Searchbar from "../../components/searchbar/Searchbar";
 import Cards from "../../components/cards/Cards";
 import Options from "../../components/options/Options";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import { obtenerPilotos, showPilotos } from "../../redux/actions/action";
 //styles
 import styles from "./Home.module.css";
 
 const Home = () => {
-    const [show, setShow] = useState(false);
-    const [driver, setdriver] = useState("");
-    const [page, setPage] = useState(1);
-    const [itemPage, setItemPage] = useState(9);
+    const dispatch = useDispatch();
+    const pilotos = useSelector((state) => state.drivers); //pilotos de API
+    const pilotosBD = useSelector((state) => state.driversBD); //pilotos de BD
+    const show = useSelector((state) => state.show);
 
-    //paginacion
-    const paginas = driver.length / itemPage;
+    //const [show, setShow] = useState(false);
+    //const [drivers, setDrivers] = useState();
 
-    function getDrivers() {
-        fetch("http://localhost:3001/drivers/1")
+    //funcion reemplazada por la action obtenerPilotos
+    /* function getDrivers() {
+        fetch("http://localhost:3001/drivers")
             .then((res) => res.json())
-            .then((driver) => setdriver(driver))
-            .catch((err) => console.log(`Error: ${err}`));
-    }
+            .then((driver) => setDrivers(driver))
+            .catch((err) =>
+                console.log(`No se pudo obtener los pilotos \n${err}`)
+            );
+    } */
     function showDrivers() {
-        setShow(!show);
+        dispatch(showPilotos());
     }
     useEffect(() => {
-        getDrivers();
-    }, []);
+        //getDrivers();
+        dispatch(obtenerPilotos());
+    }, [dispatch]);
+
     return (
         <>
             <Link to="/" className={styles.link}>
@@ -42,12 +50,7 @@ const Home = () => {
                 <Options></Options>
             </div>
             {show ? (
-                <Cards
-                    driver={driver}
-                    paginas={paginas}
-                    page={page}
-                    setPage={setPage}
-                ></Cards>
+                <Cards pilotos={pilotos}></Cards>
             ) : (
                 <button className={styles.btn} onClick={showDrivers}>
                     <span>Mostrar conductores</span>
