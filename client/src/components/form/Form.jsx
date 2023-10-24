@@ -32,7 +32,11 @@ const Form = () => {
                 Home
             </Link>
             <h1>Ingresa tu propio piloto</h1>
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form
+                onSubmit={handleSubmit}
+                className={styles.form}
+                encType="multipart/form-data"
+            >
                 <div className={styles.row}>
                     <label htmlFor="name">Nombres</label>
                     <input
