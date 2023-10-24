@@ -7,14 +7,13 @@ module.exports = (sequelize) => {
         "Team",
         {
             id: {
-                type: DataTypes.UUID,
-                primaryKey: true,
-                allowNull: false,
-                default: DataTypes.UUIDV4,
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
             },
             nombre: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                primaryKey: true,
             },
         },
         { timestamps: false }
