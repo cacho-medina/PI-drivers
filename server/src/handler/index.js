@@ -99,11 +99,9 @@ const postDriverHandler = async (req, res) => {
         surname,
         nationality,
         birthday,
-        img,
         description,
         teams,
     } = req.body;
-
     try {
         const driverInfo = await createDriver(
             id,
@@ -112,7 +110,7 @@ const postDriverHandler = async (req, res) => {
             surname,
             nationality,
             birthday,
-            img,
+            req.file.path,
             description,
             teams
         );
