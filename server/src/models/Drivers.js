@@ -8,46 +8,35 @@ module.exports = (sequelize) => {
         {
             id: {
                 type: DataTypes.UUID,
-                primaryKey: true,
-                allowNull: false,
                 defaultValue: DataTypes.UUIDV4,
+                primaryKey: true,
             },
-            nombre: {
+            name: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            apellido: {
+            surname: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            descripcion: {
+            description: {
                 type: DataTypes.STRING,
             },
             img: {
-                type: DataTypes.DATE,
+                type: DataTypes.BLOB,
             },
-            nacionalidad: {
+            nationality: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            fechaNacimiento: {
+            birthday: {
                 type: DataTypes.DATE,
+                allowNull: false,
+            },
+            number: {
+                type: DataTypes.INTEGER,
             },
         },
         { timestamps: false }
     );
 };
-
-/*
-
-
-ID (deben ser distintos a los que vienen de la API). *
-Nombre. *
-Apellido. *
-Descripción. *
-Imagen. *
-Nacionalidad. *
-Fecha de Nacimiento. *
-
-
-*/
