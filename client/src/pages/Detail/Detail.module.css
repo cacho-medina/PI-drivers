@@ -25,7 +25,7 @@
 .number {
     font-size: 2.5rem;
     margin: 20px 0;
-    color: var(--gray);
+    color: var(--main-red);
 }
 .title {
     font-size: 3rem;

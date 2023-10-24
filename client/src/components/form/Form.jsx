@@ -10,8 +10,8 @@ const Form = () => {
         dob: "",
         team: "",
         desc: "",
-        img: "",
     });
+    const [img, setImg] = useState("");
     const [errors, setErrors] = useState({});
     function handleChange(event) {
         setPilot({ ...pilot, [event.target.name]: event.target.value });
@@ -20,10 +20,30 @@ const Form = () => {
         );
     }
     const handleImageChange = (event) => {
-        setPilot({ ...pilot, img: event.target.files[0] });
+        setImg({ ...img, [event.target.name]: event.target.files[0].name });
     };
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
+        const formData = {
+            ...pilot,
+            ...img,
+        };
+        try {
+            const response = await fetch("http://localhost:3001/drivers", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                // La solicitud fue exitosa
+                console.log("Datos enviados con éxito");
+            } else {
+                // La solicitud no fue exitosa
+                console.error("Error al enviar los datos");
+            }
+        } catch (error) {
+            console.error("Error en la solicitud", error);
+        }
     }
 
     return (
@@ -129,7 +149,6 @@ const Form = () => {
                         id="img"
                         name="img"
                         onChange={handleImageChange}
-                        value={pilot.img}
                         accept=".jpg, .jpeg, .png"
                     />
                 </div>
@@ -150,7 +169,7 @@ const Form = () => {
                     )}
                 </div>
                 <button type="submit" className={styles.btn}>
-                    Ingresar
+                    Crear piloto
                 </button>
             </form>
         </div>

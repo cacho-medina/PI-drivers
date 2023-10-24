@@ -31,7 +31,9 @@ const Detail = () => {
                 </div>
                 <div className={styles.infoContainer}>
                     <h1 className={styles.title}>{driver.name}</h1>
-                    <h3 className={styles.number}>{driver.id}</h3>
+                    <h3 className={styles.number}>
+                        {!isNaN(driver.number) ? driver.number : driver.id}
+                    </h3>
                     <h3>
                         Team: <span className={styles.info}>{driver.team}</span>
                     </h3>

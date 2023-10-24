@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 //components
 import Searchbar from "../../components/searchbar/Searchbar";
 import Cards from "../../components/cards/Cards";
 import Options from "../../components/options/Options";
 //redux
 import { useSelector, useDispatch } from "react-redux";
-import { obtenerPilotos, showPilotos } from "../../redux/actions/action";
+import {
+    obtenerPilotos,
+    showPilotos,
+    obtenerTeams,
+} from "../../redux/actions/action";
 //styles
 import styles from "./Home.module.css";
 
@@ -15,24 +19,13 @@ const Home = () => {
     const pilotos = useSelector((state) => state.drivers); //pilotos de API
     const pilotosBD = useSelector((state) => state.driversBD); //pilotos de BD
     const show = useSelector((state) => state.show);
+    const origin = useSelector((state) => state.origin);
 
-    //const [show, setShow] = useState(false);
-    //const [drivers, setDrivers] = useState();
-
-    //funcion reemplazada por la action obtenerPilotos
-    /* function getDrivers() {
-        fetch("http://localhost:3001/drivers")
-            .then((res) => res.json())
-            .then((driver) => setDrivers(driver))
-            .catch((err) =>
-                console.log(`No se pudo obtener los pilotos \n${err}`)
-            );
-    } */
     function showDrivers() {
         dispatch(showPilotos());
+        dispatch(obtenerTeams());
     }
     useEffect(() => {
-        //getDrivers();
         dispatch(obtenerPilotos());
     }, [dispatch]);
 
@@ -50,7 +43,15 @@ const Home = () => {
                 <Options></Options>
             </div>
             {show ? (
-                <Cards pilotos={pilotos}></Cards>
+                origin === "bd" ? (
+                    !pilotosBD.length ? (
+                        <p>No hay pilotos en la Base de Datos</p>
+                    ) : (
+                        <Cards pilotos={pilotosBD}></Cards>
+                    )
+                ) : (
+                    <Cards pilotos={pilotos}></Cards>
+                )
             ) : (
                 <button className={styles.btn} onClick={showDrivers}>
                     <span>Mostrar conductores</span>
