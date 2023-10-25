@@ -17,6 +17,7 @@ const initialState = {
     teams: [],
     show: false,
     pagina: 1,
+    name: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -82,7 +83,11 @@ const rootReducer = (state = initialState, action) => {
                 driversCopy: action.payload,
             };
         case OBTENER_PILOTOS_BY_NAME:
-            return { ...state, drivers: action.payload };
+            return {
+                ...state,
+                drivers: action.payload.data,
+                name: action.payload.nombre,
+            };
         case OBTENER_TEAMS:
             return { ...state, teams: action.payload };
         default:

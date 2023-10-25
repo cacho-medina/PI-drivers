@@ -20,17 +20,15 @@ export function obtenerPilotos() {
         });
     };
 }
-
-//REVISAR
-export function obtenerPilotosByName() {
-    return async function (dispatch, nombre) {
+export function obtenerPilotosByName(nombre) {
+    return async function (dispatch) {
         const res = await axios.get(
-            `http://localhost:3001/drivers?name=${nombre}}`
+            `http://localhost:3001/drivers?name=${nombre}`
         );
         const data = await res.data;
         return dispatch({
             type: OBTENER_PILOTOS_BY_NAME,
-            payload: data,
+            payload: { data, nombre },
         });
     };
 }

@@ -23,7 +23,9 @@ const Home = () => {
 
     function showDrivers() {
         dispatch(showPilotos());
-        dispatch(obtenerTeams());
+        if (!show) {
+            dispatch(obtenerTeams());
+        }
     }
     useEffect(() => {
         dispatch(obtenerPilotos());

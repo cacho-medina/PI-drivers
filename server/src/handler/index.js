@@ -99,6 +99,7 @@ const postDriverHandler = async (req, res) => {
         surname,
         nationality,
         birthday,
+        img,
         description,
         teams,
     } = req.body;
@@ -110,7 +111,7 @@ const postDriverHandler = async (req, res) => {
             surname,
             nationality,
             birthday,
-            req.file.path,
+            img,
             description,
             teams
         );

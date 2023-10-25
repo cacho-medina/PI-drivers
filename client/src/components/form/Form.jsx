@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./Form.module.css";
 import { useState } from "react";
 import validate from "./validate.js";
+import axios from "axios";
 const Form = () => {
     const [pilot, setPilot] = useState({
         name: "",
@@ -11,7 +12,7 @@ const Form = () => {
         team: "",
         desc: "",
     });
-    const [img, setImg] = useState("");
+    const [img, setImg] = useState(null);
     const [errors, setErrors] = useState({});
     function handleChange(event) {
         setPilot({ ...pilot, [event.target.name]: event.target.value });
@@ -22,27 +23,30 @@ const Form = () => {
     const handleImageChange = (event) => {
         setImg({ ...img, [event.target.name]: event.target.files[0].name });
     };
-    async function handleSubmit(event) {
+    async function crearPiloto(infoPiloto) {
+        const res = await axios.post(
+            "http://localhost:3001/drivers",
+            infoPiloto
+        );
+        return res;
+    }
+    function handleSubmit(event) {
         event.preventDefault();
-        const formData = {
-            ...pilot,
-            ...img,
-        };
-        try {
-            const response = await fetch("http://localhost:3001/drivers", {
-                method: "POST",
-                body: formData,
+        const driver = Object.assign({}, pilot, img);
+        if (!Object.keys(errors).length === 0) {
+            alert("Algo salio mal :(");
+        } else {
+            crearPiloto(driver);
+            alert("Piloto creado con exito!");
+            setPilot({
+                name: "",
+                lastname: "",
+                nationality: "",
+                dob: "",
+                team: "",
+                desc: "",
             });
-
-            if (response.ok) {
-                // La solicitud fue exitosa
-                console.log("Datos enviados con éxito");
-            } else {
-                // La solicitud no fue exitosa
-                console.error("Error al enviar los datos");
-            }
-        } catch (error) {
-            console.error("Error en la solicitud", error);
+            setImg("");
         }
     }
 
