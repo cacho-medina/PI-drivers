@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { obtenerPilotosByName } from "../../redux/actions/action";
 import styles from "./Searchbar.module.css";
 import { useState } from "react";
 function Searchbar() {
     const [name, setName] = useState("");
     const dispatch = useDispatch();
-    const nombreDriver = useSelector((state) => state.name);
 
     function handleChange(event) {
         setName(event.target.value);
@@ -17,7 +16,7 @@ function Searchbar() {
             <input
                 type="text"
                 name="name"
-                value={nombreDriver}
+                value={name}
                 placeholder="Busca un conductor..."
                 className={styles.input}
                 onChange={handleChange}

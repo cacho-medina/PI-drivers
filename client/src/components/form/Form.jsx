@@ -6,13 +6,14 @@ import axios from "axios";
 const Form = () => {
     const [pilot, setPilot] = useState({
         name: "",
-        lastname: "",
+        surname: "",
         nationality: "",
-        dob: "",
-        team: "",
-        desc: "",
+        birthday: "",
+        teams: "",
+        description: "",
+        img: "",
     });
-    const [img, setImg] = useState(null);
+
     const [errors, setErrors] = useState({});
     function handleChange(event) {
         setPilot({ ...pilot, [event.target.name]: event.target.value });
@@ -20,36 +21,41 @@ const Form = () => {
             validate({ ...pilot, [event.target.name]: event.target.value })
         );
     }
-    const handleImageChange = (event) => {
-        setImg({ ...img, [event.target.name]: event.target.files[0].name });
+    const crearPiloto = async (pilot) => {
+        try {
+            const res = await axios.post(
+                "http://localhost:3001/drivers",
+                pilot
+            );
+            return res.data;
+        } catch (error) {
+            return error;
+        }
     };
-    async function crearPiloto(infoPiloto) {
-        const res = await axios.post(
-            "http://localhost:3001/drivers",
-            infoPiloto
-        );
-        return res;
-    }
     function handleSubmit(event) {
         event.preventDefault();
-        const driver = Object.assign({}, pilot, img);
-        if (!Object.keys(errors).length === 0) {
-            alert("Algo salio mal :(");
-        } else {
-            crearPiloto(driver);
+        try {
+            crearPiloto(pilot)
+                .then((data) => {
+                    setPilot({
+                        name: "",
+                        surname: "",
+                        nationality: "",
+                        birthday: "",
+                        teams: "",
+                        description: "",
+                        img: "",
+                    });
+                })
+                .catch((err) => err.message);
+
             alert("Piloto creado con exito!");
-            setPilot({
-                name: "",
-                lastname: "",
-                nationality: "",
-                dob: "",
-                team: "",
-                desc: "",
-            });
-            setImg("");
+            console.log(pilot);
+        } catch (error) {
+            alert(error.message);
         }
     }
-
+    console.log(errors);
     return (
         <div className={styles.formContainer}>
             <Link to="/home" className={styles.link}>
@@ -79,19 +85,19 @@ const Form = () => {
                     )}
                 </div>
                 <div className={styles.row}>
-                    <label htmlFor="lastname">Apellidos</label>
+                    <label htmlFor="surname">Apellidos</label>
                     <input
                         type="text"
-                        id="lastname"
-                        name="lastname"
+                        id="surname"
+                        name="surname"
                         onChange={handleChange}
-                        value={pilot.lastname}
+                        value={pilot.surname}
                     />
                 </div>
                 <div className={`${styles.row} ${styles.rowError}`}>
-                    {errors.lastname && (
+                    {errors.surname && (
                         <label className={styles.errorMessage}>
-                            {errors.lastname}
+                            {errors.surname}
                         </label>
                     )}
                 </div>
@@ -113,13 +119,13 @@ const Form = () => {
                     )}
                 </div>
                 <div className={styles.row}>
-                    <label htmlFor="dob">Fecha de Nacimiento</label>
+                    <label htmlFor="birthday">Fecha de Nacimiento</label>
                     <input
                         type="date"
-                        id="dob"
-                        name="dob"
+                        id="birthday"
+                        name="birthday"
                         onChange={handleChange}
-                        value={pilot.dob}
+                        value={pilot.birthday}
                     />
                 </div>
                 <div className={`${styles.row} ${styles.rowError}`}>
@@ -130,49 +136,62 @@ const Form = () => {
                     )}
                 </div>
                 <div className={styles.row}>
-                    <label htmlFor="team">Escuderia</label>
+                    <label htmlFor="teams">Escuderia</label>
                     <input
                         type="text"
-                        id="team"
-                        name="team"
+                        id="teams"
+                        name="teams"
                         onChange={handleChange}
-                        value={pilot.team}
+                        value={pilot.teams}
                     />
                 </div>
                 <div className={`${styles.row} ${styles.rowError}`}>
-                    {errors.team && (
+                    {errors.teams && (
                         <label className={styles.errorMessage}>
-                            {errors.team}
+                            {errors.teams}
                         </label>
                     )}
                 </div>
                 <div className={styles.row}>
                     <label htmlFor="img">Imagen</label>
                     <input
-                        type="file"
-                        id="img"
+                        type="url"
+                        placeholder="Añade la url de tu imagen"
                         name="img"
-                        onChange={handleImageChange}
-                        accept=".jpg, .jpeg, .png"
+                        id="img"
+                        className={styles.imgInput}
+                        onChange={handleChange}
+                        value={pilot.img}
                     />
                 </div>
+                <div className={`${styles.row} ${styles.rowError}`}>
+                    {errors.img && (
+                        <label className={styles.errorMessage}>
+                            {errors.img}
+                        </label>
+                    )}
+                </div>
                 <div className={styles.row}>
-                    <label htmlFor="desc">Descripcion</label>
+                    <label htmlFor="description">Descripcion</label>
                     <textarea
-                        name="desc"
-                        id="desc"
-                        value={pilot.desc}
+                        name="description"
+                        id="description"
+                        value={pilot.description}
                         onChange={handleChange}
                     ></textarea>
                 </div>
                 <div className={`${styles.row} ${styles.rowError}`}>
-                    {errors.desc && (
+                    {errors.description && (
                         <label className={styles.errorMessage}>
-                            {errors.desc}
+                            {errors.description}
                         </label>
                     )}
                 </div>
-                <button type="submit" className={styles.btn}>
+                <button
+                    type="submit"
+                    disabled={Object.keys(errors).length > 0}
+                    className={styles.btn}
+                >
                     Crear piloto
                 </button>
             </form>

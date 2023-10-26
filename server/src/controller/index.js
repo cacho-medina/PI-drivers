@@ -30,15 +30,10 @@ const createTeam = async (nombre) => {
 };
 
 const getDriverByIdDB = async (id) => {
-    return await Driver.findByPk(id, {
-        include: {
-            model: Team,
-            attributes: ["nombre"],
-        },
-    });
+    return await Driver.findByPk(id);
 };
 
-const getAllUsers = async () => {
+const getAllDrivers = async () => {
     return await Driver.findAll();
 };
 
@@ -62,6 +57,6 @@ module.exports = {
     createDriver,
     createTeam,
     getDriverByIdDB,
-    getAllUsers,
+    getAllDrivers,
     cleanInfo,
 };

@@ -3,7 +3,7 @@ const {
     createDriver,
     createTeam,
     getDriverByIdDB,
-    getAllUsers,
+    getAllDrivers,
     cleanInfo,
 } = require("../controller/index");
 
@@ -16,7 +16,7 @@ const getDriversHandler = async (req, res) => {
         //limpia la info obtenida de la api
         const dataApi = cleanInfo(data);
         //drivers de BD
-        const dataDB = await getAllUsers();
+        const dataDB = await getAllDrivers();
         //une todos los pilotos en un solo array
         const pilotos = [...dataApi, ...dataDB];
 
@@ -65,7 +65,7 @@ const getDriverHandler = async (req, res) => {
             res.status(200).json(driver);
         }
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: "Error al mostrar conductor" });
     }
 };
 const getTeamsHandler = async (req, res) => {
@@ -88,7 +88,7 @@ const getTeamsHandler = async (req, res) => {
 
         res.status(200).json(teams);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: "Error al obtener escuderias" });
     }
 };
 const postDriverHandler = async (req, res) => {

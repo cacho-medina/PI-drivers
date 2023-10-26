@@ -3,8 +3,6 @@ import styles from "./Card.module.css";
 import F1 from "../../assets/F1-v2.png";
 
 const Card = ({ driver }) => {
-    /* const currentTeam = driver?.teams?.split(","); */
-
     return (
         <div className={styles.card}>
             <div className={styles.cardHeader}>
@@ -18,7 +16,6 @@ const Card = ({ driver }) => {
                 </Link>
             </div>
             <h3 className={styles.team}>
-                {/* {currentTeam[currentTeam.length - 1]} */}
                 {driver.team}
             </h3>
             <img

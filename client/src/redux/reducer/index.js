@@ -72,9 +72,18 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, show: action.payload };
         case ORIGEN:
             if (action.payload === "bd") {
-                return { ...state, origin: action.payload };
+                return {
+                    ...state,
+                    origin: action.payload,
+                    driversBD: state.drivers.filter((driver) =>
+                        isNaN(driver.id)
+                    ),
+                };
             } else {
-                return { ...state, origin: "api" };
+                return {
+                    ...state,
+                    origin: "api",
+                };
             }
         case OBTENER_PILOTOS:
             return {

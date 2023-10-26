@@ -16,7 +16,7 @@ import styles from "./Home.module.css";
 
 const Home = () => {
     const dispatch = useDispatch();
-    const pilotos = useSelector((state) => state.drivers); //pilotos de API
+    const pilotos = useSelector((state) => state.drivers); //pilotos
     const pilotosBD = useSelector((state) => state.driversBD); //pilotos de BD
     const show = useSelector((state) => state.show);
     const origin = useSelector((state) => state.origin);
